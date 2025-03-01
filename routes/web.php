@@ -42,6 +42,7 @@ Route::get('/cards/{tenantId}', [AdminController::class,'loadCardByTenant']);
 /** onbaording * */
 Route::get('/onboard/dashboard', [OnboardingController::class,'loadDashabord']);
 Route::get('/onboard/{tenant}/{stage}', [OnboardingController::class,'loadStageByTenant']);
+Route::post('/validation/{tenant}/{stage}/{card}', [OnboardingController::class,'validateCardByTenant']);
 Route::get('/onboard/{tenant}/completed', [OnboardingController::class,'loadOnBoardingCompleted']);
 
 /** general pages  * */

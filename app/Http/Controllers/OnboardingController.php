@@ -26,8 +26,13 @@ class OnboardingController extends Controller {
     }*/
 
     public function loadDashabord() {
-      
-      return view('onboard.dashboard');
+      $stageList = DB::table('stage')
+      ->leftJoin('tenant', 'stage.tenant_id' , '=', 'tenant.id')
+      ->select('stage.id', 'stage.short_name','tenant.name as tname', 'stage.name','stage.stage_order','stage.active')
+      ->where('stage.stage_order', 1)
+      ->get();
+
+    return view('onboard.dashboard', ['stageList' => $stageList]);
   }
 
   public function loadStageByTenant($tenant,$stage_name) {
@@ -35,6 +40,13 @@ class OnboardingController extends Controller {
     ->leftJoin('tenant', 'stage.tenant_id' , '=', 'tenant.id')
     ->select('stage.id', 'stage.short_name','tenant.name as tname', 'stage.name','stage.stage_order','stage.active')
     ->where('tenant.name', $tenant)
+    ->get();
+
+    $stageName = DB::table('stage')
+    ->leftJoin('tenant', 'stage.tenant_id' , '=', 'tenant.id')
+    ->select('stage.id', 'tenant.title as tname', 'stage.name','stage.stage_order','stage.active')
+    ->where('tenant.name', $tenant)
+    ->where('stage.short_name', $stage_name)
     ->get();
 
     $cardList = DB::table('card')
@@ -54,7 +66,7 @@ class OnboardingController extends Controller {
     ->where('stage.short_name', $stage_name)
     ->get();
 
-    return view('onboard.stage', ['stageList' => $stageList,'cardList'=>$cardList, 'fieldsList'=>$fieldsList]);
+    return view('onboard.stage', ['stageList' => $stageList,'cardList'=>$cardList, 'fieldsList'=>$fieldsList, 'stageName'=>$stageName]);
 }
 
 public function loadOnBoardingCompleted($tenant) {
@@ -63,7 +75,13 @@ public function loadOnBoardingCompleted($tenant) {
   ->select('stage.id', 'tenant.title', 'stage.name','stage.stage_order','stage.active')
   ->where('stage.tenant_id', $id)
   ->get();
-  return view('admin.stage', ['tenantList' => $tenantList]);
+  return view('onboard.stage', ['tenantList' => $tenantList]);
+}
+
+public function validateCardByTenant(Request $request){
+  print($request);
+
+  return view('onboard.validation');
 }
 
 

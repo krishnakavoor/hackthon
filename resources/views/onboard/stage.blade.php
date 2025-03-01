@@ -5,7 +5,9 @@
 @section('content')
 <div  class="container">
 <div class="row" >
-    <h1>Welcome to onboarding</h1>
+<div class="col-md-12">
+    <h1>{{$stageName[0]->tname}}</h1>
+</div>
 </div>
 </div>
 <div  class="container">
@@ -13,12 +15,16 @@
     <div class="col-md-3">
     @foreach ($stageList as $stage)
         <h3><a href="<?php echo url('/onboard'); ?>/<?php echo $stage->tname ?>/<?php echo $stage->short_name ?>/">{{$stage->name}}</a></h3>
-@endforeach 
-
+    @endforeach 
 </div>
-    <div class="col-md-9"> 
+
+    <div class="col-md-9">
+        <h2>  <h1>{{$stageName[0]->name}}</h1></h2>
     @foreach ($cardList as $card)
-        <h2>{{$card->name}}</h2>
+    <div class="panel panel-default">
+  <div class="panel-heading">{{$card->name}}</div>
+  <div class="panel-body">
+    <form action="<?php echo url('/validation'); ?>/<?php echo $stage->tname ?>/<?php echo $card->sid ?>/<?php echo $card->id ?>" method="post">
         <div class="row">
         @foreach ($fieldsList as $field)
         @if($card->id === $field->cid)
@@ -54,6 +60,13 @@
         </div>
         @endif
         @endforeach
+       
+</div>
+<input type="hidden" name="_token" value="{{csrf_token()}}">
+<input type="submit" class="btn btn-info" value="Save">
+</form>
+
+</div>
 </div>
     @endforeach
     </div>

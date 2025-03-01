@@ -11,8 +11,9 @@
 </div>
 <div  class="container">
 <div class="row" >
-      <h2><a href="<?php echo url('/onboard/lacare/general-information'); ?>">Start Lacare onboarding</a></h2>
-      <h2><a href="<?php echo url('/onboard/ameritas/general-information'); ?>">Start Ameritas onbaording</a></h2>  
+@foreach ($stageList as $stage)
+        <h2><a href="<?php echo url('/onboard'); ?>/<?php echo $stage->tname ?>/<?php echo $stage->short_name ?>/">Start {{$stage->tname}} onboarding</a></h2>
+@endforeach
 </div>
 </div>
     </div>
