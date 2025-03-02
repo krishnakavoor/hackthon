@@ -22,14 +22,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/search', [SearchController::class,'searchResults']);
-
-/** contact and News letter* */
-Route::get('/contact-us', [ContactController::class,'loadContactUsForm']);
-Route::post('/contact/request', [ContactController::class,'contactUsForm']);
-Route::post('/newsletter/submit', [ContactController::class,'captureNewsletter']);
-Route::get('/thank-you', [ContactController::class,'thankYou']);
-
 /** contact and News letter* */
 Route::get('/tenant', [AdminController::class,'loadTenant']);
 Route::get('/stage', [AdminController::class,'loadStage']);
@@ -45,7 +37,3 @@ Route::get('/onboard/{tenant}/{stage}', [OnboardingController::class,'loadStageB
 Route::post('/validation/{tenant}/{stage}/{card}', [OnboardingController::class,'validateCardByTenant']);
 Route::get('/onboard/{tenant}/completed', [OnboardingController::class,'loadOnBoardingCompleted']);
 
-/** general pages  * */
-Route::get('/privacy-policy', [PageController::class,'privacyPolicy']);
-Route::get('/cookie-policy',[PageController::class,'cookiePolicy']);
-Route::get('/about-us',[PageController::class,'aboutUs']);

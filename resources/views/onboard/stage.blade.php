@@ -32,19 +32,19 @@
         @if($field->type==='text')
         <div class="form-group">
         <label for="{{$field->name}}">{{$field->title}}</label>
-        <input type="text" class="form-control" name="{{$field->name}}" maxlength="{{$field->max_length}}}" id="{{$field->name}}">
+        <input type="text" class="form-control" name="{{$field->name}}" maxlength="{{$field->max_length}}" id="{{$field->name}}">
         </div>
         @endif
         @if($field->type==='phone')
         <div class="form-group">
         <label for="{{$field->name}}">{{$field->title}}</label>
-        <input type="number" class="form-control" name="{{$field->name}}" maxlength="{{$field->max_length}}}" id="{{$field->name}}">
+        <input type="number" class="form-control" name="{{$field->name}}" maxlength="{{$field->max_length}}" id="{{$field->name}}">
         </div>
         @endif
         @if($field->type==='email')
         <div class="form-group">
         <label for="{{$field->name}}">{{$field->title}}</label>
-        <input type="email" class="form-control" name="{{$field->name}}" maxlength="{{$field->max_length}}}" id="{{$field->name}}">
+        <input type="email" class="form-control" name="{{$field->name}}" maxlength="{{$field->max_length}}" id="{{$field->name}}">
         </div>
         @endif
         @if($field->type==='select')

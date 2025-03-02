@@ -78,10 +78,13 @@ public function loadOnBoardingCompleted($tenant) {
   return view('onboard.stage', ['tenantList' => $tenantList]);
 }
 
-public function validateCardByTenant(Request $request){
-  print($request);
+public function validateCardByTenant(Request $request,$stage,$tenant, $card){
+  $fieldsList = DB::table('fields')
+    ->select('fields.id', 'fields.name', 'fields.title','fields.type', 'fields.param','fields.min_length','fields.max_length', 'fields.is_mandatory','fields.active')
+    ->where('fields.card_id',$card)
+    ->get();
 
-  return view('onboard.validation');
+  return view('onboard.validation',['fieldsList' => $fieldsList, 'request'=>$request]);
 }
 
 
